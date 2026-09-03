@@ -9,9 +9,6 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from src.fm.cond import t_embed
-
-
 @dataclass(frozen=True)
 class HRTFFlowConfig:
     width: int = 128
@@ -36,6 +33,27 @@ def coordinate_features(unit_coordinates: torch.Tensor, bands: int) -> torch.Ten
         phase = unit_coordinates * (math.pi * (2**band))
         features.extend((torch.sin(phase), torch.cos(phase)))
     return torch.cat(features, dim=-1)
+
+
+def time_embedding(time: torch.Tensor, dimension: int) -> torch.Tensor:
+    """Sin/cos embedding for scalar flow times in ``[0, 1]``."""
+
+    if time.ndim != 1:
+        raise ValueError("time must have shape [batch]")
+    if dimension < 2 or dimension % 2:
+        raise ValueError("time embedding dimension must be a positive even number")
+    half = dimension // 2
+    frequencies = torch.exp(
+        torch.linspace(
+            math.log(1.0),
+            math.log(1000.0),
+            half,
+            device=time.device,
+            dtype=time.dtype,
+        )
+    )
+    phase = time[:, None] * frequencies[None, :]
+    return torch.cat((torch.sin(phase), torch.cos(phase)), dim=-1)
 
 
 class TanhMLP(nn.Module):
@@ -158,7 +176,7 @@ class ConditionalHRTFFieldFlow(nn.Module):
         query_features = coordinate_features(
             query_unit_xyz, self.config.coordinate_bands
         )
-        time_features = t_embed(time, dim=self.config.time_dim)
+        time_features = time_embedding(time, self.config.time_dim)
         inputs = torch.cat(
             (
                 state.unsqueeze(-1),

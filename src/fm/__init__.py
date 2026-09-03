@@ -1,2 +1,1 @@
-"""Flow Matching utilities (objectives, integrators, conditioning)."""
-
+"""Functional flow-matching utilities for HRTF fields."""

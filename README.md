@@ -1,15 +1,9 @@
 # hrtfm_pinn: physics-informed HRTF upsampling with flow matching
 
-This repository contains two deliberately separate research workflows:
-
-1. The original azimuth-conditioned binaural-speech STFT flow in
-   `scripts/train.py` and `scripts/sample.py`.
-2. An experimental HUTUBS subject-40 HRTF upsampler in
-   `scripts/train_hrtf.py` and `scripts/sample_hrtf.py`.
-
-The HRTF workflow does **not** reinterpret speech time frames as spatial
-coordinates.  It uses a continuous Cartesian neural field so that the
-Helmholtz residual can be differentiated with respect to `(x, y, z)`.
+This repository implements an experimental HUTUBS subject-40 HRTF upsampler
+using conditional functional flow matching and a differentiable Helmholtz
+constraint. It uses a continuous Cartesian neural field so the physics
+residual can be differentiated with respect to `(x, y, z)`.
 
 ## Subject-40 protocol
 

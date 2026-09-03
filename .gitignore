@@ -31,11 +31,5 @@ runs/*
 !runs/.gitkeep
 !runs/**/.gitkeep
 
-# Logs & local artifacts
-wandb/
-logs/
-outputs/
+# Local logs
 *.log
-
-# Optional Hydra multirun dir
-multirun/

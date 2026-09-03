@@ -1,8 +1,0 @@
-audio_root: /parallel_scratch/yc01847/whitenoise_binaural_kemar_fm
-train_csv: ${data.audio_root}/manifests/metadata_train.csv
-val_csv:   ${data.audio_root}/manifests/metadata_val.csv
-sr: 16000
-seg_sec: 1.5
-
-az_mode: sincos        # or "deg" if you want the old behavior
-enforce_csv_sr: true

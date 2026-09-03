@@ -1,2 +1,1 @@
-"""Utility helpers (audio, metrics, seed)."""
-
+"""HRTF evaluation and reproducibility helpers."""
