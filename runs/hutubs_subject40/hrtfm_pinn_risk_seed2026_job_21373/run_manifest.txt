@@ -1,0 +1,11 @@
+run_name=hrtfm_pinn_risk_seed2026_job_21373
+slurm_job_id=21373
+slurm_job_name=hrtfm-pinn-s40-risk
+slurm_node_list=costar11
+slurm_restart_count=0
+project_dir=/users/yc01847/hrtfm_pinn
+hutubs_mat=/users/yc01847/hrtfm_pinn/../PINN-for-HRTF-upsampling/40.mat
+conda_environment=hrtfm_pinn
+started_or_restarted_utc=2026-09-03T09:43:36Z
+git_commit=e3fdaa0cfd0c704088760393ab7b19e248fa5281
+completed_utc=2026-09-03T09:56:51Z

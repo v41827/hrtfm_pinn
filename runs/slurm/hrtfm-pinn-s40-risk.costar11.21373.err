@@ -1,0 +1,11 @@
+test_gaussian_source_field_is_helmholtz_valid (test_helmholtz.HelmholtzResidualTest) ... ok
+test_plane_wave_is_zero_in_unit_coordinates (test_helmholtz.HelmholtzResidualTest) ... ok
+test_heun_path_ends_exactly_at_observations (test_hrtf_flow.HRTFFlowTest) ... ok
+test_physics_endpoint_supports_parameter_gradients (test_hrtf_flow.HRTFFlowTest) ... ok
+test_field_contains_no_dense_target (test_hutubs_subject40.HUTUBSSubject40Test) ... ok
+test_protocol_shapes_and_holdout (test_hutubs_subject40.HUTUBSSubject40Test) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.225s
+
+OK

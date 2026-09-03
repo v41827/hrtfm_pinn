@@ -1,0 +1,281 @@
+PyTorch 2.4.1
+CUDA runtime 12.1
+GPU NVIDIA H200
+All Python files compiled successfully.
+{
+  "arguments": {
+    "batch_size": 4,
+    "context_dim": 128,
+    "coordinate_bands": 4,
+    "depth": 4,
+    "device": "cuda:0",
+    "frequency_scale_hz": 15000.0,
+    "grad_clip": 1.0,
+    "input": "/users/yc01847/PINN-for-HRTF-upsampling/40.mat",
+    "learning_rate": 0.0002,
+    "log_every": 100,
+    "num_workers": 0,
+    "observation_width": 96,
+    "output_dir": "/users/yc01847/hrtfm_pinn/runs/hutubs_subject40/hrtfm_pinn_risk_seed2026_job_21373/training",
+    "physics_every": 1,
+    "physics_points": 64,
+    "physics_ramp_steps": 2000,
+    "physics_unroll_steps": 4,
+    "physics_warmup_steps": 500,
+    "physics_weight": 0.1,
+    "prior_modes": 16,
+    "prior_seed": 1729,
+    "resume": null,
+    "save_every": 500,
+    "seed": 2026,
+    "speed_of_sound": 343.0,
+    "steps": 20000,
+    "time_dim": 32,
+    "weight_decay": 0.0001,
+    "width": 128
+  },
+  "device": "cuda:0",
+  "field_tasks": 28,
+  "frequencies_hz": [
+    2067.1875,
+    4134.375,
+    6201.5625,
+    8268.75,
+    10335.9375,
+    12403.125,
+    14470.3125
+  ],
+  "held_out_directions": 930,
+  "known_directions": 330,
+  "radius_m": 0.09,
+  "subject_file": "/users/yc01847/PINN-for-HRTF-upsampling/40.mat"
+}
+Training uses train_hrtf only; dense total_hrtf is held out.
+[     1/20000] total=1.22025 fm=1.22025 physics=0 w=0 5.62 step/s
+[   100/20000] total=0.715306 fm=0.715306 physics=0 w=0 215.08 step/s
+[   200/20000] total=0.729504 fm=0.729504 physics=0 w=0 268.15 step/s
+[   300/20000] total=1.3222 fm=1.3222 physics=0 w=0 291.04 step/s
+[   400/20000] total=0.460673 fm=0.460673 physics=0 w=0 304.63 step/s
+[   500/20000] total=0.426925 fm=0.426925 physics=0 w=0 313.57 step/s
+[   600/20000] total=0.429274 fm=0.429223 physics=0.010283 w=0.005 106.67 step/s
+[   700/20000] total=0.435497 fm=0.435431 physics=0.00661296 w=0.01 72.72 step/s
+[   800/20000] total=0.33235 fm=0.331245 physics=0.0736206 w=0.015 58.80 step/s
+[   900/20000] total=0.182506 fm=0.18239 physics=0.00577147 w=0.02 51.12 step/s
+[  1000/20000] total=1.00034 fm=0.992991 physics=0.293983 w=0.025 46.28 step/s
+[  1100/20000] total=0.265275 fm=0.264055 physics=0.0406433 w=0.03 42.88 step/s
+[  1200/20000] total=0.146825 fm=0.144995 physics=0.0522729 w=0.035 40.47 step/s
+[  1300/20000] total=0.118541 fm=0.116255 physics=0.05715 w=0.04 38.63 step/s
+[  1400/20000] total=0.643384 fm=0.643056 physics=0.00728888 w=0.045 37.18 step/s
+[  1500/20000] total=0.568893 fm=0.564572 physics=0.0864299 w=0.05 36.01 step/s
+[  1600/20000] total=0.573056 fm=0.56633 physics=0.122302 w=0.055 35.05 step/s
+[  1700/20000] total=0.243046 fm=0.238583 physics=0.0743715 w=0.06 34.22 step/s
+[  1800/20000] total=0.629373 fm=0.628979 physics=0.00605638 w=0.065 33.53 step/s
+[  1900/20000] total=0.730968 fm=0.722866 physics=0.115735 w=0.07 32.91 step/s
+[  2000/20000] total=0.738279 fm=0.728864 physics=0.12554 w=0.075 32.42 step/s
+[  2100/20000] total=0.298901 fm=0.294353 physics=0.0568495 w=0.08 31.96 step/s
+[  2200/20000] total=0.219796 fm=0.215464 physics=0.0509606 w=0.085 31.57 step/s
+[  2300/20000] total=0.495153 fm=0.482443 physics=0.141225 w=0.09 31.21 step/s
+[  2400/20000] total=0.634408 fm=0.623132 physics=0.118692 w=0.095 30.90 step/s
+[  2500/20000] total=0.133672 fm=0.127195 physics=0.0647653 w=0.1 30.60 step/s
+[  2600/20000] total=0.110787 fm=0.103718 physics=0.0706996 w=0.1 30.34 step/s
+[  2700/20000] total=0.215275 fm=0.214779 physics=0.00496218 w=0.1 30.09 step/s
+[  2800/20000] total=0.509431 fm=0.508509 physics=0.00921495 w=0.1 29.88 step/s
+[  2900/20000] total=0.426328 fm=0.406807 physics=0.1952 w=0.1 29.68 step/s
+[  3000/20000] total=0.473325 fm=0.472559 physics=0.00766551 w=0.1 29.51 step/s
+[  3100/20000] total=0.52052 fm=0.51966 physics=0.0086004 w=0.1 29.33 step/s
+[  3200/20000] total=0.348237 fm=0.346715 physics=0.0152185 w=0.1 29.19 step/s
+[  3300/20000] total=0.871765 fm=0.86793 physics=0.0383444 w=0.1 29.03 step/s
+[  3400/20000] total=0.193742 fm=0.182122 physics=0.116194 w=0.1 28.91 step/s
+[  3500/20000] total=0.13922 fm=0.133585 physics=0.0563511 w=0.1 28.78 step/s
+[  3600/20000] total=0.158607 fm=0.153189 physics=0.0541753 w=0.1 28.66 step/s
+[  3700/20000] total=0.455963 fm=0.454976 physics=0.00987833 w=0.1 28.55 step/s
+[  3800/20000] total=0.157666 fm=0.152116 physics=0.055503 w=0.1 28.45 step/s
+[  3900/20000] total=0.399002 fm=0.398533 physics=0.00469602 w=0.1 28.35 step/s
+[  4000/20000] total=0.304013 fm=0.299236 physics=0.0477637 w=0.1 28.24 step/s
+[  4100/20000] total=0.29417 fm=0.292908 physics=0.0126278 w=0.1 28.15 step/s
+[  4200/20000] total=0.177626 fm=0.169438 physics=0.0818744 w=0.1 28.07 step/s
+[  4300/20000] total=0.397173 fm=0.39313 physics=0.0404308 w=0.1 27.99 step/s
+[  4400/20000] total=0.185801 fm=0.18515 physics=0.00650896 w=0.1 27.91 step/s
+[  4500/20000] total=0.274529 fm=0.274227 physics=0.00301512 w=0.1 27.84 step/s
+[  4600/20000] total=0.179589 fm=0.172753 physics=0.0683636 w=0.1 27.76 step/s
+[  4700/20000] total=0.163935 fm=0.163055 physics=0.00879957 w=0.1 27.70 step/s
+[  4800/20000] total=0.725879 fm=0.722146 physics=0.0373334 w=0.1 27.64 step/s
+[  4900/20000] total=0.517142 fm=0.513484 physics=0.0365803 w=0.1 27.58 step/s
+[  5000/20000] total=0.367211 fm=0.366623 physics=0.00587953 w=0.1 27.53 step/s
+[  5100/20000] total=0.175754 fm=0.174582 physics=0.0117174 w=0.1 27.47 step/s
+[  5200/20000] total=0.324106 fm=0.310592 physics=0.135145 w=0.1 27.43 step/s
+[  5300/20000] total=0.617254 fm=0.616387 physics=0.00867834 w=0.1 27.38 step/s
+[  5400/20000] total=0.395192 fm=0.394875 physics=0.00317018 w=0.1 27.34 step/s
+[  5500/20000] total=0.648812 fm=0.642373 physics=0.0643855 w=0.1 27.29 step/s
+[  5600/20000] total=0.197433 fm=0.19614 physics=0.0129286 w=0.1 27.24 step/s
+[  5700/20000] total=0.489978 fm=0.489289 physics=0.00688563 w=0.1 27.20 step/s
+[  5800/20000] total=0.0900236 fm=0.0787459 physics=0.112777 w=0.1 27.16 step/s
+[  5900/20000] total=0.2403 fm=0.237276 physics=0.0302418 w=0.1 27.12 step/s
+[  6000/20000] total=0.198102 fm=0.189522 physics=0.0858003 w=0.1 27.08 step/s
+[  6100/20000] total=0.402025 fm=0.401201 physics=0.00823715 w=0.1 27.04 step/s
+[  6200/20000] total=0.425125 fm=0.423662 physics=0.0146372 w=0.1 27.01 step/s
+[  6300/20000] total=0.274316 fm=0.255884 physics=0.184327 w=0.1 26.98 step/s
+[  6400/20000] total=0.0806052 fm=0.0803207 physics=0.00284542 w=0.1 26.95 step/s
+[  6500/20000] total=0.23488 fm=0.233262 physics=0.0161842 w=0.1 26.92 step/s
+[  6600/20000] total=0.268755 fm=0.267297 physics=0.0145754 w=0.1 26.88 step/s
+[  6700/20000] total=0.55731 fm=0.554753 physics=0.0255681 w=0.1 26.85 step/s
+[  6800/20000] total=0.410315 fm=0.403299 physics=0.0701533 w=0.1 26.82 step/s
+[  6900/20000] total=0.379697 fm=0.376307 physics=0.0338984 w=0.1 26.80 step/s
+[  7000/20000] total=0.452568 fm=0.445803 physics=0.0676442 w=0.1 26.77 step/s
+[  7100/20000] total=0.282145 fm=0.281676 physics=0.00469274 w=0.1 26.74 step/s
+[  7200/20000] total=0.103516 fm=0.0991243 physics=0.0439122 w=0.1 26.71 step/s
+[  7300/20000] total=0.19147 fm=0.184183 physics=0.0728698 w=0.1 26.69 step/s
+[  7400/20000] total=0.0343456 fm=0.0310644 physics=0.0328118 w=0.1 26.67 step/s
+[  7500/20000] total=0.267083 fm=0.26222 physics=0.0486318 w=0.1 26.65 step/s
+[  7600/20000] total=0.232256 fm=0.22114 physics=0.111156 w=0.1 26.62 step/s
+[  7700/20000] total=0.331866 fm=0.326352 physics=0.0551335 w=0.1 26.60 step/s
+[  7800/20000] total=0.229305 fm=0.216912 physics=0.12393 w=0.1 26.58 step/s
+[  7900/20000] total=0.164095 fm=0.163313 physics=0.00782191 w=0.1 26.55 step/s
+[  8000/20000] total=0.194933 fm=0.1857 physics=0.0923215 w=0.1 26.54 step/s
+[  8100/20000] total=0.191931 fm=0.181209 physics=0.107223 w=0.1 26.51 step/s
+[  8200/20000] total=0.237842 fm=0.23314 physics=0.0470199 w=0.1 26.49 step/s
+[  8300/20000] total=0.140321 fm=0.139858 physics=0.00463658 w=0.1 26.47 step/s
+[  8400/20000] total=0.348128 fm=0.345095 physics=0.0303274 w=0.1 26.45 step/s
+[  8500/20000] total=0.248643 fm=0.241149 physics=0.0749335 w=0.1 26.44 step/s
+[  8600/20000] total=0.140129 fm=0.138914 physics=0.0121529 w=0.1 26.42 step/s
+[  8700/20000] total=0.339979 fm=0.338282 physics=0.0169674 w=0.1 26.40 step/s
+[  8800/20000] total=0.118003 fm=0.117664 physics=0.00339056 w=0.1 26.39 step/s
+[  8900/20000] total=0.256106 fm=0.251845 physics=0.0426159 w=0.1 26.37 step/s
+[  9000/20000] total=0.714201 fm=0.710951 physics=0.0324974 w=0.1 26.35 step/s
+[  9100/20000] total=0.392671 fm=0.392114 physics=0.00556316 w=0.1 26.34 step/s
+[  9200/20000] total=0.151844 fm=0.144695 physics=0.0714871 w=0.1 26.32 step/s
+[  9300/20000] total=0.393379 fm=0.378766 physics=0.146129 w=0.1 26.30 step/s
+[  9400/20000] total=0.0237901 fm=0.0183719 physics=0.0541812 w=0.1 26.28 step/s
+[  9500/20000] total=0.606375 fm=0.60038 physics=0.0599523 w=0.1 26.27 step/s
+[  9600/20000] total=0.259925 fm=0.248065 physics=0.118599 w=0.1 26.25 step/s
+[  9700/20000] total=0.237447 fm=0.235821 physics=0.0162617 w=0.1 26.23 step/s
+[  9800/20000] total=0.474119 fm=0.4678 physics=0.0631928 w=0.1 26.22 step/s
+[  9900/20000] total=0.369044 fm=0.359902 physics=0.0914199 w=0.1 26.21 step/s
+[ 10000/20000] total=0.497836 fm=0.496941 physics=0.00895309 w=0.1 26.20 step/s
+[ 10100/20000] total=0.399585 fm=0.398385 physics=0.0119975 w=0.1 26.18 step/s
+[ 10200/20000] total=0.132249 fm=0.12943 physics=0.0281887 w=0.1 26.17 step/s
+[ 10300/20000] total=0.232297 fm=0.225353 physics=0.0694334 w=0.1 26.16 step/s
+[ 10400/20000] total=0.170035 fm=0.168446 physics=0.0158823 w=0.1 26.15 step/s
+[ 10500/20000] total=0.489849 fm=0.488095 physics=0.0175405 w=0.1 26.14 step/s
+[ 10600/20000] total=0.15489 fm=0.148613 physics=0.0627699 w=0.1 26.13 step/s
+[ 10700/20000] total=0.0702025 fm=0.0649279 physics=0.0527461 w=0.1 26.12 step/s
+[ 10800/20000] total=0.269634 fm=0.269501 physics=0.00133885 w=0.1 26.11 step/s
+[ 10900/20000] total=0.326178 fm=0.322835 physics=0.0334251 w=0.1 26.09 step/s
+[ 11000/20000] total=0.128266 fm=0.125355 physics=0.0291042 w=0.1 26.08 step/s
+[ 11100/20000] total=0.448898 fm=0.443373 physics=0.055256 w=0.1 26.07 step/s
+[ 11200/20000] total=0.434229 fm=0.433935 physics=0.0029315 w=0.1 26.06 step/s
+[ 11300/20000] total=0.0246727 fm=0.0245195 physics=0.00153166 w=0.1 26.05 step/s
+[ 11400/20000] total=0.512029 fm=0.506589 physics=0.0543977 w=0.1 26.04 step/s
+[ 11500/20000] total=0.0757884 fm=0.0706354 physics=0.0515296 w=0.1 26.03 step/s
+[ 11600/20000] total=0.268716 fm=0.260137 physics=0.085797 w=0.1 26.03 step/s
+[ 11700/20000] total=0.581756 fm=0.576742 physics=0.0501321 w=0.1 26.02 step/s
+[ 11800/20000] total=0.421631 fm=0.420325 physics=0.0130603 w=0.1 26.01 step/s
+[ 11900/20000] total=0.0590087 fm=0.0502559 physics=0.0875281 w=0.1 26.00 step/s
+[ 12000/20000] total=0.272169 fm=0.271647 physics=0.00522456 w=0.1 26.00 step/s
+[ 12100/20000] total=0.415046 fm=0.412425 physics=0.0262114 w=0.1 25.99 step/s
+[ 12200/20000] total=0.262288 fm=0.261603 physics=0.00685625 w=0.1 25.98 step/s
+[ 12300/20000] total=0.19131 fm=0.190787 physics=0.00523377 w=0.1 25.97 step/s
+[ 12400/20000] total=0.137109 fm=0.133935 physics=0.0317406 w=0.1 25.97 step/s
+[ 12500/20000] total=0.124761 fm=0.115618 physics=0.0914276 w=0.1 25.96 step/s
+[ 12600/20000] total=0.119847 fm=0.112616 physics=0.0723121 w=0.1 25.95 step/s
+[ 12700/20000] total=0.257828 fm=0.256037 physics=0.0179136 w=0.1 25.95 step/s
+[ 12800/20000] total=0.361264 fm=0.359749 physics=0.0151489 w=0.1 25.94 step/s
+[ 12900/20000] total=0.503564 fm=0.503188 physics=0.00376325 w=0.1 25.93 step/s
+[ 13000/20000] total=0.216985 fm=0.21544 physics=0.0154486 w=0.1 25.93 step/s
+[ 13100/20000] total=0.241123 fm=0.239568 physics=0.0155445 w=0.1 25.92 step/s
+[ 13200/20000] total=0.0942449 fm=0.0930753 physics=0.0116969 w=0.1 25.91 step/s
+[ 13300/20000] total=0.248793 fm=0.244562 physics=0.0423103 w=0.1 25.91 step/s
+[ 13400/20000] total=0.255525 fm=0.252992 physics=0.0253337 w=0.1 25.90 step/s
+[ 13500/20000] total=0.345167 fm=0.344803 physics=0.00363525 w=0.1 25.89 step/s
+[ 13600/20000] total=0.107368 fm=0.10531 physics=0.0205811 w=0.1 25.89 step/s
+[ 13700/20000] total=1.09324 fm=1.08643 physics=0.0680664 w=0.1 25.88 step/s
+[ 13800/20000] total=0.25205 fm=0.24554 physics=0.0650958 w=0.1 25.87 step/s
+[ 13900/20000] total=0.232083 fm=0.227099 physics=0.0498422 w=0.1 25.87 step/s
+[ 14000/20000] total=0.175951 fm=0.175223 physics=0.00727886 w=0.1 25.86 step/s
+[ 14100/20000] total=0.371362 fm=0.365655 physics=0.0570693 w=0.1 25.85 step/s
+[ 14200/20000] total=0.339965 fm=0.33702 physics=0.0294538 w=0.1 25.85 step/s
+[ 14300/20000] total=0.511218 fm=0.509998 physics=0.0122042 w=0.1 25.84 step/s
+[ 14400/20000] total=0.248498 fm=0.242701 physics=0.057967 w=0.1 25.84 step/s
+[ 14500/20000] total=0.0771189 fm=0.0725088 physics=0.0461005 w=0.1 25.83 step/s
+[ 14600/20000] total=0.0811622 fm=0.080755 physics=0.00407239 w=0.1 25.83 step/s
+[ 14700/20000] total=0.404557 fm=0.398532 physics=0.0602438 w=0.1 25.82 step/s
+[ 14800/20000] total=0.517371 fm=0.516477 physics=0.0089366 w=0.1 25.81 step/s
+[ 14900/20000] total=0.256997 fm=0.252388 physics=0.0460951 w=0.1 25.81 step/s
+[ 15000/20000] total=0.0809715 fm=0.0712012 physics=0.0977028 w=0.1 25.81 step/s
+[ 15100/20000] total=0.305483 fm=0.301349 physics=0.041337 w=0.1 25.80 step/s
+[ 15200/20000] total=0.235768 fm=0.233023 physics=0.0274533 w=0.1 25.79 step/s
+[ 15300/20000] total=0.286383 fm=0.283756 physics=0.0262702 w=0.1 25.79 step/s
+[ 15400/20000] total=0.0912762 fm=0.0819142 physics=0.09362 w=0.1 25.78 step/s
+[ 15500/20000] total=0.406407 fm=0.402755 physics=0.03652 w=0.1 25.78 step/s
+[ 15600/20000] total=0.0532108 fm=0.0521647 physics=0.0104617 w=0.1 25.77 step/s
+[ 15700/20000] total=0.491531 fm=0.485835 physics=0.0569545 w=0.1 25.77 step/s
+[ 15800/20000] total=0.933258 fm=0.931805 physics=0.0145308 w=0.1 25.76 step/s
+[ 15900/20000] total=0.09061 fm=0.087889 physics=0.0272107 w=0.1 25.76 step/s
+[ 16000/20000] total=0.0602784 fm=0.0565006 physics=0.0377783 w=0.1 25.75 step/s
+[ 16100/20000] total=0.186991 fm=0.182751 physics=0.0423978 w=0.1 25.75 step/s
+[ 16200/20000] total=0.361996 fm=0.358359 physics=0.0363728 w=0.1 25.74 step/s
+[ 16300/20000] total=0.21836 fm=0.216305 physics=0.0205506 w=0.1 25.73 step/s
+[ 16400/20000] total=0.0930657 fm=0.086534 physics=0.0653172 w=0.1 25.73 step/s
+[ 16500/20000] total=0.0876726 fm=0.0844645 physics=0.0320808 w=0.1 25.73 step/s
+[ 16600/20000] total=0.191579 fm=0.185489 physics=0.0609059 w=0.1 25.72 step/s
+[ 16700/20000] total=0.238398 fm=0.236992 physics=0.0140563 w=0.1 25.71 step/s
+[ 16800/20000] total=0.239749 fm=0.226765 physics=0.129836 w=0.1 25.71 step/s
+[ 16900/20000] total=0.0502562 fm=0.038122 physics=0.121343 w=0.1 25.71 step/s
+[ 17000/20000] total=0.191791 fm=0.18828 physics=0.0351124 w=0.1 25.70 step/s
+[ 17100/20000] total=0.176075 fm=0.174746 physics=0.0132827 w=0.1 25.70 step/s
+[ 17200/20000] total=0.0970604 fm=0.09288 physics=0.0418042 w=0.1 25.69 step/s
+[ 17300/20000] total=0.184802 fm=0.18329 physics=0.0151144 w=0.1 25.69 step/s
+[ 17400/20000] total=0.0661762 fm=0.061083 physics=0.0509318 w=0.1 25.69 step/s
+[ 17500/20000] total=0.33014 fm=0.324973 physics=0.0516707 w=0.1 25.68 step/s
+[ 17600/20000] total=0.421707 fm=0.420238 physics=0.0146917 w=0.1 25.67 step/s
+[ 17700/20000] total=0.431196 fm=0.420732 physics=0.10464 w=0.1 25.67 step/s
+[ 17800/20000] total=0.0249131 fm=0.0220659 physics=0.0284718 w=0.1 25.67 step/s
+[ 17900/20000] total=0.220564 fm=0.213891 physics=0.0667283 w=0.1 25.66 step/s
+[ 18000/20000] total=0.137724 fm=0.13715 physics=0.00573904 w=0.1 25.66 step/s
+[ 18100/20000] total=0.203883 fm=0.19928 physics=0.0460331 w=0.1 25.65 step/s
+[ 18200/20000] total=0.289845 fm=0.286219 physics=0.0362664 w=0.1 25.65 step/s
+[ 18300/20000] total=0.0760237 fm=0.0730047 physics=0.0301892 w=0.1 25.65 step/s
+[ 18400/20000] total=0.161163 fm=0.159193 physics=0.0196996 w=0.1 25.64 step/s
+[ 18500/20000] total=0.306161 fm=0.304138 physics=0.0202295 w=0.1 25.64 step/s
+[ 18600/20000] total=0.15829 fm=0.154381 physics=0.0390901 w=0.1 25.63 step/s
+[ 18700/20000] total=0.142381 fm=0.141081 physics=0.0129965 w=0.1 25.63 step/s
+[ 18800/20000] total=0.17844 fm=0.176325 physics=0.0211468 w=0.1 25.63 step/s
+[ 18900/20000] total=0.549812 fm=0.548227 physics=0.0158446 w=0.1 25.62 step/s
+[ 19000/20000] total=0.224037 fm=0.222686 physics=0.0135127 w=0.1 25.62 step/s
+[ 19100/20000] total=0.0697556 fm=0.0661981 physics=0.0355752 w=0.1 25.61 step/s
+[ 19200/20000] total=0.324657 fm=0.321216 physics=0.0344146 w=0.1 25.61 step/s
+[ 19300/20000] total=0.287273 fm=0.278963 physics=0.0830958 w=0.1 25.61 step/s
+[ 19400/20000] total=0.16657 fm=0.163094 physics=0.034762 w=0.1 25.60 step/s
+[ 19500/20000] total=0.273112 fm=0.271346 physics=0.0176583 w=0.1 25.60 step/s
+[ 19600/20000] total=0.281454 fm=0.276324 physics=0.0512999 w=0.1 25.60 step/s
+[ 19700/20000] total=0.214067 fm=0.210094 physics=0.039729 w=0.1 25.59 step/s
+[ 19800/20000] total=0.268045 fm=0.266328 physics=0.0171656 w=0.1 25.59 step/s
+[ 19900/20000] total=0.170705 fm=0.168729 physics=0.0197576 w=0.1 25.59 step/s
+[ 20000/20000] total=0.156472 fm=0.153521 physics=0.0295192 w=0.1 25.58 step/s
+Wrote /users/yc01847/hrtfm_pinn/runs/hutubs_subject40/hrtfm_pinn_risk_seed2026_job_21373/training/checkpoint_final.pt
+sample=0 unknown paper error=-3.474 dB
+sample=1 unknown paper error=-3.738 dB
+sample=2 unknown paper error=-3.213 dB
+sample=3 unknown paper error=-3.850 dB
+sample=4 unknown paper error=-3.580 dB
+{
+  "complex_nmse_db_mean_across_frequencies": -5.505628420155547,
+  "magnitude_nmse_db_mean_across_frequencies": -9.706954604793415,
+  "paper_error_db_mean_across_frequencies": -5.384610169649923,
+  "unknown_direction_count": 930
+}
+Wrote /users/yc01847/hrtfm_pinn/runs/hutubs_subject40/hrtfm_pinn_risk_seed2026_job_21373/evaluation/heun40_samples5/prediction.mat
+  2067.2 Hz  paper=  -2.162 dB  complex_nmse=  -2.394 dB  magnitude_nmse=  -3.601 dB
+  4134.4 Hz  paper=  -0.485 dB  complex_nmse=  -0.521 dB  magnitude_nmse=  -1.194 dB
+  6201.6 Hz  paper=  -0.091 dB  complex_nmse=  -0.134 dB  magnitude_nmse=  -0.732 dB
+  8268.8 Hz  paper=  -0.108 dB  complex_nmse=  -0.142 dB  magnitude_nmse=  -0.722 dB
+ 10335.9 Hz  paper=  -0.039 dB  complex_nmse=  -0.058 dB  magnitude_nmse=  -0.584 dB
+ 12403.1 Hz  paper=  -0.026 dB  complex_nmse=  -0.057 dB  magnitude_nmse=  -0.580 dB
+ 14470.3 Hz  paper=   0.015 dB  complex_nmse=   0.003 dB  magnitude_nmse=  -0.305 dB
+{
+  "complex_nmse_db_mean_across_frequencies": -0.47203132625059674,
+  "magnitude_nmse_db_mean_across_frequencies": -1.1026253142967517,
+  "paper_error_db_mean_across_frequencies": -0.4137543653871546,
+  "unknown_direction_count": 930
+}
+Completed run: /users/yc01847/hrtfm_pinn/runs/hutubs_subject40/hrtfm_pinn_risk_seed2026_job_21373

@@ -1,0 +1,16 @@
+{
+  "checkpoint": "/users/yc01847/hrtfm_pinn/runs/hutubs_subject40/hrtfm_pinn_risk_seed2026_job_21373/training/checkpoint_final.pt",
+  "input": "/users/yc01847/PINN-for-HRTF-upsampling/40.mat",
+  "integration_steps": 40,
+  "known_values_are_hard_constrained": true,
+  "mean_prediction_unknown_metrics": {
+    "complex_nmse_db_mean_across_frequencies": -5.505628420155547,
+    "magnitude_nmse_db_mean_across_frequencies": -9.706954604793415,
+    "paper_error_db_mean_across_frequencies": -5.384610169649923,
+    "unknown_direction_count": 930
+  },
+  "num_samples": 5,
+  "primary_metric": "paper_error_db",
+  "primary_split": "unknown",
+  "seed": 2040
+}

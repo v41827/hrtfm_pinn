@@ -1,0 +1,13 @@
+{
+  "prediction": "/users/yc01847/PINN-for-HRTF-upsampling/40_L3.mat",
+  "prediction_key": "total_est",
+  "primary_metric": "paper_error_db",
+  "primary_split": "unknown",
+  "reference": "/users/yc01847/PINN-for-HRTF-upsampling/40.mat",
+  "unknown_metrics": {
+    "complex_nmse_db_mean_across_frequencies": -0.47203132625059674,
+    "magnitude_nmse_db_mean_across_frequencies": -1.1026253142967517,
+    "paper_error_db_mean_across_frequencies": -0.4137543653871546,
+    "unknown_direction_count": 930
+  }
+}
