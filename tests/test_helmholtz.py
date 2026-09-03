@@ -6,7 +6,7 @@ import unittest
 import torch
 
 from src.fm.functional_prior import HelmholtzGaussianField
-from src.physics.helmholtz import normalized_helmholtz_residual
+from src.physics.helmholtz import normalized_helmholtz_residual, physical_helmholtz_loss
 
 
 class HelmholtzResidualTest(unittest.TestCase):
@@ -46,6 +46,23 @@ class HelmholtzResidualTest(unittest.TestCase):
         )
 
         self.assertLess(float(residual.abs().max()), 2e-6)
+
+    def test_plane_wave_is_zero_in_physical_coordinates(self) -> None:
+        coordinates = torch.randn(2, 12, 3, dtype=torch.float64, requires_grad=True)
+        frequencies = torch.tensor([2067.1875, 14470.3125], dtype=torch.float64)
+        speed = 343.0
+        wave_number = 2.0 * math.pi * frequencies / speed
+        plane_wave = torch.cos(wave_number[:, None] * coordinates[..., 1])
+
+        loss, residual = physical_helmholtz_loss(
+            plane_wave,
+            coordinates,
+            frequencies,
+            speed_of_sound_m_s=speed,
+        )
+
+        self.assertLess(float(loss), 1e-24)
+        self.assertLess(float(residual.abs().max()), 1e-12)
 
 
 if __name__ == "__main__":

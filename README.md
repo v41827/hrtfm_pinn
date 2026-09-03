@@ -121,6 +121,50 @@ python scripts/evaluate_hrtf.py \
 For a data-only flow ablation, train the same architecture with
 `--physics-weight 0` and a separate output directory.
 
+## Fei-Ma-aligned comparison protocol
+
+The `fei-ma-comparable` branch adds a separate comparison runner; it does not
+replace the original shared conditional model or its results.  The aligned
+runner matches the controllable parts of the published subject-40 setup:
+
+- 28 independent scalar models rather than one shared model;
+- three `tanh` hidden layers and Ma's frequency-dependent width rule;
+- Adam with learning rate `1e-3`, no weight decay, and no gradient clipping;
+- all 630 coordinates in the relevant hemisphere in every physics loss;
+- equal flow-matching and Helmholtz weights, without physics warm-up;
+- one million steps per attempt, up to five attempts, with `-29 dB`
+  training-data early selection;
+- the same 330 known/930 unknown split and Equation (25) evaluator.
+
+The irreducible differences are explicit: a flow model also needs current
+state and flow time; it transports a smooth random Helmholtz field; physics is
+applied to a differentiably unrolled endpoint; and its attempt score evaluates
+the un-clamped five-sample mean on measured directions.  Held-out
+`total_hrtf` remains unavailable to training and model selection.
+
+The main and checkpoint-aware risk jobs are:
+
+```bash
+sbatch cluster/costar_subject40_fei_aligned_main.sbatch
+sbatch cluster/costar_subject40_fei_aligned_risk.sbatch
+```
+
+Both default to the exact completed Fei Ma 1M baseline under
+`../PINN-for-HRTF-upsampling/results/paper-subject40-1m-20260901T111304Z/`.
+The full protocol can take several days because it trains 28 independent flows
+and may use multiple attempts.  The risk job saves model, optimizer, RNG,
+attempt, step, and completed-field state every 10,000 steps.  If a new Slurm
+job ID is needed after a timeout, reuse the printed run name:
+
+```bash
+RUN_NAME=hrtfm_pinn_fei_aligned_1m_risk_seed2026_job_ORIGINAL_JOB_ID \
+  sbatch cluster/costar_subject40_fei_aligned_risk.sbatch
+```
+
+For a short cluster validation without changing the scripts, override the
+budget, for example `STEPS_PER_ATTEMPT=100 ATTEMPTS=1`; such a run is only a
+smoke test and must not be reported as the aligned experiment.
+
 ## CoSTAR subject-40 run
 
 The checked-in Slurm job requests one full H200 GPU from CoSTAR's `main`

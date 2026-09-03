@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import torch
 
-from src.models.hrtf_flow import ConditionalHRTFFieldFlow
+from src.models.hrtf_flow import ConditionalHRTFFieldFlow, IndependentHRTFFieldFlow
 
 
 def euler_unroll_to_endpoint(
@@ -89,6 +89,79 @@ def heun_integrate_hrtf(
                 predicted, observed_indices, observed_source, observed_target, t1
             )
         velocity_1 = model.velocity_with_context(predicted, t1, query_unit_xyz, context)
+        state = state + 0.5 * dt * (velocity_0 + velocity_1)
+        if clamp_enabled:
+            state = _set_observed_path(
+                state, observed_indices, observed_source, observed_target, t1
+            )
+    return state
+
+
+def euler_unroll_independent_to_endpoint(
+    model: IndependentHRTFFieldFlow,
+    initial_state: torch.Tensor,
+    query_xyz_m: torch.Tensor,
+    *,
+    steps: int,
+) -> torch.Tensor:
+    """Differentiably unroll one independent field flow from t=0 to t=1."""
+
+    if steps < 1:
+        raise ValueError("steps must be positive")
+    state = initial_state
+    batch_size = state.shape[0]
+    dt = 1.0 / steps
+    for index in range(steps):
+        time = torch.full(
+            (batch_size,), index * dt, device=state.device, dtype=state.dtype
+        )
+        state = state + dt * model(state, time, query_xyz_m)
+    return state
+
+
+@torch.no_grad()
+def heun_integrate_independent_hrtf(
+    model: IndependentHRTFFieldFlow,
+    initial_state: torch.Tensor,
+    query_xyz_m: torch.Tensor,
+    *,
+    steps: int,
+    observed_indices: torch.Tensor | None = None,
+    observed_source: torch.Tensor | None = None,
+    observed_target: torch.Tensor | None = None,
+) -> torch.Tensor:
+    """Heun integration for one field, optionally enforcing measured values."""
+
+    if steps < 1:
+        raise ValueError("steps must be positive")
+    clamp_arguments = (observed_indices, observed_source, observed_target)
+    clamp_enabled = all(value is not None for value in clamp_arguments)
+    if not clamp_enabled and any(value is not None for value in clamp_arguments):
+        raise ValueError("all observed-path arguments must be supplied together")
+
+    state = initial_state
+    batch_size = state.shape[0]
+    grid = torch.linspace(0.0, 1.0, steps + 1, device=state.device, dtype=state.dtype)
+    if clamp_enabled:
+        zero = torch.zeros((batch_size,), device=state.device, dtype=state.dtype)
+        state = _set_observed_path(
+            state, observed_indices, observed_source, observed_target, zero
+        )
+    for index in range(steps):
+        t0 = torch.full(
+            (batch_size,), grid[index].item(), device=state.device, dtype=state.dtype
+        )
+        t1 = torch.full(
+            (batch_size,), grid[index + 1].item(), device=state.device, dtype=state.dtype
+        )
+        dt = grid[index + 1] - grid[index]
+        velocity_0 = model(state, t0, query_xyz_m)
+        predicted = state + dt * velocity_0
+        if clamp_enabled:
+            predicted = _set_observed_path(
+                predicted, observed_indices, observed_source, observed_target, t1
+            )
+        velocity_1 = model(predicted, t1, query_xyz_m)
         state = state + 0.5 * dt * (velocity_0 + velocity_1)
         if clamp_enabled:
             state = _set_observed_path(

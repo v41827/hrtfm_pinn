@@ -5,9 +5,19 @@ import unittest
 import torch
 
 from src.fm.functional_prior import HelmholtzGaussianField
-from src.fm.hrtf_integrators import euler_unroll_to_endpoint, heun_integrate_hrtf
-from src.models.hrtf_flow import ConditionalHRTFFieldFlow, HRTFFlowConfig
-from src.physics.helmholtz import helmholtz_loss
+from src.fm.hrtf_integrators import (
+    euler_unroll_independent_to_endpoint,
+    euler_unroll_to_endpoint,
+    heun_integrate_hrtf,
+    heun_integrate_independent_hrtf,
+)
+from src.models.hrtf_flow import (
+    ConditionalHRTFFieldFlow,
+    HRTFFlowConfig,
+    IndependentHRTFFieldFlow,
+    IndependentHRTFFlowConfig,
+)
+from src.physics.helmholtz import helmholtz_loss, physical_helmholtz_loss
 
 
 class HRTFFlowTest(unittest.TestCase):
@@ -78,6 +88,36 @@ class HRTFFlowTest(unittest.TestCase):
             observed_target=observed_values,
         )
 
+        torch.testing.assert_close(result[:, observed_indices], observed_values)
+
+    def test_independent_flow_physics_gradients_and_hard_path(self) -> None:
+        model = IndependentHRTFFieldFlow(
+            IndependentHRTFFlowConfig(width=6, depth=3)
+        )
+        coordinates = (0.09 * torch.randn(1, 8, 3)).requires_grad_(True)
+        frequency = torch.tensor([4134.375])
+        latent = self.prior.sample_latent(1, device="cpu")
+        source = self.prior(coordinates / 0.09, latent, frequency)
+        endpoint = euler_unroll_independent_to_endpoint(
+            model, source, coordinates, steps=2
+        )
+        loss, _ = physical_helmholtz_loss(endpoint, coordinates, frequency)
+        loss.backward()
+        gradients = [p.grad for p in model.parameters() if p.grad is not None]
+        self.assertTrue(gradients)
+        self.assertTrue(all(torch.isfinite(gradient).all() for gradient in gradients))
+
+        observed_indices = torch.tensor([0, 3, 6])
+        observed_values = torch.tensor([[0.3, -0.2, 0.7]])
+        result = heun_integrate_independent_hrtf(
+            model,
+            source.detach(),
+            coordinates.detach(),
+            steps=3,
+            observed_indices=observed_indices,
+            observed_source=source.detach()[:, observed_indices],
+            observed_target=observed_values,
+        )
         torch.testing.assert_close(result[:, observed_indices], observed_values)
 
 

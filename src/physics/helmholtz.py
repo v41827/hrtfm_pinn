@@ -100,3 +100,33 @@ def helmholtz_loss(
         create_graph=True,
     )
     return residual.square().mean(), residual
+
+
+def physical_helmholtz_loss(
+    field: torch.Tensor,
+    xyz_m: torch.Tensor,
+    frequency_hz: torch.Tensor,
+    *,
+    speed_of_sound_m_s: float = 343.0,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    r"""Helmholtz loss when the model directly consumes coordinates in metres.
+
+    This is algebraically the same normalized residual used by Ma et al.,
+    ``laplacian_x(H) / k^2 + H``, without the unit-sphere change of variables.
+    """
+
+    if speed_of_sound_m_s <= 0:
+        raise ValueError("speed of sound must be positive")
+    scalar_field = field.squeeze(-1) if field.ndim == 3 else field
+    frequencies = torch.as_tensor(
+        frequency_hz, device=scalar_field.device, dtype=scalar_field.dtype
+    ).reshape(-1)
+    if len(frequencies) != scalar_field.shape[0]:
+        raise ValueError("frequency_hz must contain one value per batch item")
+    wave_number = 2.0 * math.pi * frequencies / float(speed_of_sound_m_s)
+    residual = (
+        laplacian(scalar_field, xyz_m, create_graph=True)
+        / wave_number[:, None].square()
+        + scalar_field
+    )
+    return residual.square().mean(), residual

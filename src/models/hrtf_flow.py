@@ -207,3 +207,63 @@ class ConditionalHRTFFieldFlow(nn.Module):
             hemisphere,
         )
         return self.velocity_with_context(state, time, query_unit_xyz, context)
+
+
+@dataclass(frozen=True)
+class IndependentHRTFFlowConfig:
+    """Configuration for one Fei-Ma-aligned scalar-field flow.
+
+    The three hidden layers and frequency-dependent width are supplied by the
+    comparison runner.  Unlike the shared conditional model above, this model
+    deliberately has no cross-frequency or cross-component conditioning.
+    """
+
+    width: int
+    depth: int = 3
+
+    def to_dict(self) -> dict[str, int]:
+        return asdict(self)
+
+
+class IndependentHRTFFieldFlow(nn.Module):
+    """Velocity field for one frequency/component/hemisphere HRTF task.
+
+    Fei Ma's PINN consumes physical Cartesian coordinates.  Flow matching also
+    needs the current scalar state and the artificial flow time, giving five
+    inputs instead of the PINN's three.  Raw coordinates and a scalar time are
+    used here intentionally so the comparison does not gain extra Fourier or
+    time-embedding capacity.
+    """
+
+    def __init__(self, config: IndependentHRTFFlowConfig) -> None:
+        super().__init__()
+        self.config = config
+        self.velocity_network = TanhMLP(
+            input_dim=5,
+            output_dim=1,
+            width=config.width,
+            depth=config.depth,
+        )
+
+    def forward(
+        self,
+        state: torch.Tensor,
+        time: torch.Tensor,
+        query_xyz_m: torch.Tensor,
+    ) -> torch.Tensor:
+        if state.ndim == 3 and state.shape[-1] == 1:
+            state = state.squeeze(-1)
+        batch_size, points = state.shape
+        if query_xyz_m.shape != (batch_size, points, 3):
+            raise ValueError("query coordinates and state shapes are inconsistent")
+        if time.shape != (batch_size,):
+            raise ValueError("time must have shape [batch]")
+        inputs = torch.cat(
+            (
+                state.unsqueeze(-1),
+                query_xyz_m,
+                time[:, None, None].expand(-1, points, -1),
+            ),
+            dim=-1,
+        )
+        return self.velocity_network(inputs).squeeze(-1)
