@@ -21,5 +21,4 @@ def check(root: str) -> int:
     return 0
 
 if __name__ == '__main__':
-    sys.exit(check(sys.argv[1] if len(sys.argv) > 1 else 'azimuth-fm'))
-
+    sys.exit(check(sys.argv[1] if len(sys.argv) > 1 else '.'))

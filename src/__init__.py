@@ -1,2 +1,1 @@
-"""azimuth-fm source package."""
-
+"""hrtfm_pinn source package."""

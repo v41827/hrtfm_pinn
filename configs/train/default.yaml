@@ -18,10 +18,10 @@ val_show_steps: [8, 20, 40]
 
 wandb:
   enable: false
-  project: azimuth-fm
+  project: hrtfm_pinn
   log_audio: false
   max_audio: 10
   upload_artifacts: false
-  artifact_prefix: azfm
+  artifact_prefix: hrtfm_pinn
   artifact_ckpt_every: 2000
   artifact_audio_every: 2000

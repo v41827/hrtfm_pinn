@@ -20,7 +20,7 @@ template_weights:
 # W&B (optional, reuse train settings)
 wandb:
   enable: false
-  project: azimuth-fm
+  project: hrtfm_pinn
   upload_artifacts: false
 
 # Example figure dumping (spectrograms, IPD/ILD, GCC)

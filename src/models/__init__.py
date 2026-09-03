@@ -1,2 +1,1 @@
-"""Model definitions for azimuth-fm."""
-
+"""Model definitions for hrtfm_pinn."""

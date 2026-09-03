@@ -1,0 +1,52 @@
+from __future__ import annotations
+
+import math
+import unittest
+
+import torch
+
+from src.fm.functional_prior import HelmholtzGaussianField
+from src.physics.helmholtz import normalized_helmholtz_residual
+
+
+class HelmholtzResidualTest(unittest.TestCase):
+    def test_plane_wave_is_zero_in_unit_coordinates(self) -> None:
+        torch.manual_seed(3)
+        coordinates = torch.randn(2, 24, 3, dtype=torch.float64, requires_grad=True)
+        frequencies = torch.tensor([2067.1875, 14470.3125], dtype=torch.float64)
+        radius_m = 0.09
+        speed = 343.0
+        kr = 2.0 * math.pi * frequencies * radius_m / speed
+        plane_wave = torch.sin(kr[:, None] * coordinates[..., 0])
+
+        residual = normalized_helmholtz_residual(
+            plane_wave,
+            coordinates,
+            frequencies,
+            radius_m=radius_m,
+            speed_of_sound_m_s=speed,
+            create_graph=False,
+        )
+
+        self.assertLess(float(residual.abs().max()), 1e-12)
+
+    def test_gaussian_source_field_is_helmholtz_valid(self) -> None:
+        prior = HelmholtzGaussianField(modes=8, radius_m=0.09, seed=11)
+        coordinates = torch.randn(2, 16, 3, requires_grad=True)
+        frequencies = torch.tensor([2067.1875, 14470.3125])
+        latent = prior.sample_latent(2, device="cpu")
+        field = prior(coordinates, latent, frequencies)
+
+        residual = normalized_helmholtz_residual(
+            field,
+            coordinates,
+            frequencies,
+            radius_m=0.09,
+            create_graph=False,
+        )
+
+        self.assertLess(float(residual.abs().max()), 2e-6)
+
+
+if __name__ == "__main__":
+    unittest.main()
