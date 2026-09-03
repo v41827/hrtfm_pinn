@@ -11,7 +11,9 @@
 #SBATCH --output=runs/slurm/%x.%N.%j.out
 #SBATCH --error=runs/slurm/%x.%N.%j.err
 
-set -euo pipefail
+# Conda activation hooks may inspect unset variables, so enable nounset only
+# after the environment has been activated.
+set -eo pipefail
 
 # Submit this file from the hrtfm_pinn repository root.  These variables
 # can be overridden at submission time, for example:
@@ -49,6 +51,7 @@ mkdir -p "${TRAIN_DIR}" "${EVAL_DIR}"
 
 source "${CONDA_ROOT}/etc/profile.d/conda.sh"
 conda activate "${CONDA_ENV_NAME}"
+set -u
 
 export PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK}"
