@@ -183,6 +183,18 @@ Slurm stdout/stderr use the recognizable job name and job ID under
 `runs/slurm/`.  The job also records the exact commands, Git commit, Conda
 package lock, and GPU information needed to audit a paper run.
 
+When `main` is busy, submit the checkpoint-aware `risk` variant instead:
+
+```bash
+cd /users/yc01847/hrtfm_pinn
+mkdir -p runs/slurm
+sbatch cluster/costar_subject40_hrtfm_pinn_risk.sbatch
+```
+
+The `risk` job uses the same model and evaluation configuration, saves every
+500 steps, and automatically resumes the newest checkpoint after a Slurm
+requeue. Its logs are opened in append mode so restart output is retained.
+
 ## Tests
 
 No test-only dependency is required:
