@@ -131,17 +131,21 @@ For a data-only flow ablation, train the same architecture with
 
 The checked-in Slurm job requests one full H200 GPU from CoSTAR's `main`
 partition, trains the PI-FM model, and then runs five-sample/40-step Heun
-evaluation.  Create the dedicated environment once from a login node:
+evaluation. Clone the private repository into the current home path and create
+the dedicated environment once from a login node:
 
 ```bash
-cd /parallel_scratch/yc01847/hrtfm_pinn
+cd /users/yc01847
+git clone https://github.com/v41827/hrtfm_pinn.git
+cd /users/yc01847/hrtfm_pinn
+source /users/yc01847/miniconda3/etc/profile.d/conda.sh
 conda env create -f environment-hrtf.yml
 ```
 
 Submit from the repository root so that `SLURM_SUBMIT_DIR` resolves correctly:
 
 ```bash
-cd /parallel_scratch/yc01847/hrtfm_pinn
+cd /users/yc01847/hrtfm_pinn
 mkdir -p runs/slurm
 sbatch cluster/costar_subject40_hrtfm_pinn.sbatch
 ```
@@ -151,7 +155,7 @@ The default input is the sibling path
 when the MAT file lives elsewhere:
 
 ```bash
-HUTUBS_MAT=/parallel_scratch/yc01847/datasets/hutubs/subject_040/40.mat \
+HUTUBS_MAT=/users/yc01847/datasets/hutubs/subject_040/40.mat \
   sbatch cluster/costar_subject40_hrtfm_pinn.sbatch
 ```
 

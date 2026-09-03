@@ -15,11 +15,11 @@ set -euo pipefail
 
 # Submit this file from the hrtfm_pinn repository root.  These variables
 # can be overridden at submission time, for example:
-# HUTUBS_MAT=/parallel_scratch/yc01847/datasets/40.mat sbatch cluster/...
+# HUTUBS_MAT=/users/yc01847/datasets/40.mat sbatch cluster/...
 PROJECT_DIR="${SLURM_SUBMIT_DIR}"
 HUTUBS_MAT="${HUTUBS_MAT:-${PROJECT_DIR}/../PINN-for-HRTF-upsampling/40.mat}"
 MA_PINN_MAT="${MA_PINN_MAT:-${PROJECT_DIR}/../PINN-for-HRTF-upsampling/40_L3.mat}"
-CONDA_ROOT="${CONDA_ROOT:-/parallel_scratch/${USER}/miniconda3}"
+CONDA_ROOT="${CONDA_ROOT:-/users/${USER}/miniconda3}"
 CONDA_ENV_NAME="${CONDA_ENV_NAME:-hrtfm_pinn}"
 
 SEED=2026
